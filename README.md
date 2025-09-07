@@ -24,7 +24,7 @@ It provides an easy-to-use interface where users can enter prompts and get insta
 ## 🔧 How to Run
 1. Clone the repo:
    \`\`\`bash
-   git clone https://github.com/Vinaybgm/Your_AI-Co-Author.git
+   git clone[ https://github.com/Vinaybgm/Your_AI-Co-Author.git](https://github.com/Vinaygkp/Your-AI-Co-Author.git)
    \`\`\`
 2. Open index.html in your browser.  
 
