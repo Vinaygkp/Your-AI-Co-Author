@@ -30,7 +30,7 @@ It provides an easy-to-use interface where users can enter prompts and get insta
 
 ## 📸 Screenshots
 ### Home Page
-Your-AI-Co-Author/img1.png
+![Screenshot](img1.png/)
  
 
 ## 📌 Future Improvements
