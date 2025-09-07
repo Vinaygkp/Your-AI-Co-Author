@@ -29,7 +29,9 @@ It provides an easy-to-use interface where users can enter prompts and get insta
 2. Open index.html in your browser.  
 
 ## 📸 Screenshots
-*(Add your project screenshots here)*  
+### Home Page
+Your-AI-Co-Author/img1.png
+ 
 
 ## 📌 Future Improvements
 - Add backend for saving stories  
