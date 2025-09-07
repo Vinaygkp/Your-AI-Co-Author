@@ -34,7 +34,7 @@ It provides an easy-to-use interface where users can enter prompts and get insta
  
 
 ## 📌 Future Improvements
-- Add backend for saving stories  
+- Add backend for saving stories in hindi 
 - User authentication  
 - More AI models support  
 
