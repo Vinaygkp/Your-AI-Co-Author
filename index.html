@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your AI Co-Author</title>
+<!-- Favicon for browser tab -->
+<link rel="icon" type="image/x-icon" href="icon-16.png">
+<link rel="icon" type="image/png" sizes="16x16" href="icon-16.jpg">
+<link rel="icon" type="image/png" sizes="32x32" href="icon-32.jpg">
+
+<!-- Android Chrome icons -->
+<link rel="icon" type="image/png" sizes="192x192" href="icon-192.jpg">
+<link rel="icon" type="image/png" sizes="512x512" href="icon-512.jpg">
+
+<!-- Apple Touch Icon (iPhone/iPad homescreen) -->
+<link rel="apple-touch-icon" href="icon-300.png">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css" integrity="sha512-DxV+EoADOkOygM4IR9yXP8Sb2qwgidEmeqAEmDKIOfPRQZOWbXCzLC6vjbZyy0vPisbH2SyW27+ddLVCN+OMzQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="container mx-auto p-4 md:p-8 max-w-5xl">
+        <header class="text-center mb-8">
+            <h1 class="heading">Your AI Co-Author</h1>
+        <p>Bring your story ideas to life with text and images.</p>
+        </header>
+
+        <main>
+            <!-- Input Form -->
+            <div class="p-6 mb-8 card-3d">
+                <form id="story-form">
+                    <label for="story-prompt" class="block text-lg font-semibold text-black mb-2">Write your story idea here:</label>
+                    <textarea id="story-prompt" name="story-prompt" rows="4" class="w-full p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition" placeholder="e.g., A tiny astronaut who finds a jungle on a strange moon."></textarea>
+                    
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mt-4">
+                        <div>
+                            <label for="story-language" class="block text-sm font-medium text-black">Language</label>
+                            <select id="story-language" name="story-language" class="mt-1 block w-full p-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                                <option value="English" selected>English</option>
+                                <option value="Hindi">Hindi</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label for="story-genre" class="block text-sm font-medium text-black">Genre</label>
+                            <select id="story-genre" name="story-genre" class="mt-1 block w-full p-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                                <option>Fantasy</option>
+                                <option>Sci-Fi</option>
+                                <option>Mystery</option>
+                                <option>Comedy</option>
+                                <option>Horror</option>
+                                <option>Adventure</option>
+                                <option>Romance</option>
+                                <option>Thriller</option>
+                                <option>Historical Fiction</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label for="story-tone" class="block text-sm font-medium text-black">Tone</label>
+                            <select id="story-tone" name="story-tone" class="mt-1 block w-full p-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                                <option>Lighthearted</option>
+                                <option>Dark</option>
+                                <option>Epic</option>
+                                <option>Humorous</option>
+                                <option>Serious</option>
+                                <option>Whimsical</option>
+                                <option>Suspenseful</option>
+                                <option>Mysterious</option>
+                                <option>Hopeful</option>
+                                <option>Tragic</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label for="story-audience" class="block text-sm font-medium text-black">Audience</label>
+                            <select id="story-audience" name="story-audience" class="mt-1 block w-full p-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                                <option>Kids</option>
+                                <option>Teens</option>
+                                <option>Young Adult</option>
+                                <option selected>Adults</option>
+                                <option>All Ages</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <button type="submit" id="generate-btn" class="mt-6 w-full text-white font-bold py-3 px-4 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 flex items-center justify-center btn">
+                        <svg id="button-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-2 h-5 w-5"><path d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2v0a10 10 0 0 0-1.08 19.95A10 10 0 0 0 12 2Z"/><path d="m9 13 2 2 4-4"/></svg>
+                        <span id="button-text">Create My Story</span>
+                    </button>
+                </form>
+            </div>
+
+            <!-- Loading Indicator -->
+            <div id="loading-indicator" class="text-center my-10 hidden">
+                <div class="loader inline-block"></div>
+                <p class="text-gray-600 mt-4 text-lg">Creating your story... Please wait a moment.</p>
+            </div>
+
+            <!-- Error Message Display -->
+            <div id="error-message" class="hidden bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded-lg relative mb-6" role="alert">
+                <strong class="font-bold">Oops!</strong>
+                <span class="block sm:inline" id="error-text">Something went wrong. Please try again.</span>
+            </div>
+
+            <!-- Results -->
+            <div id="story-results" class="space-y-8">
+                <!-- Story content will be injected here -->
+            </div>
+
+            <!-- Download Buttons Container -->
+            <div id="download-all-container" class="my-8 hidden">
+                 <div class="flex flex-col sm:flex-row justify-center items-center gap-4">
+                    <button id="download-pdf-btn" class="inline-flex items-center justify-center w-full sm:w-auto px-6 py-3 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 disabled:bg-indigo-400 disabled:cursor-not-allowed">
+                         <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-3" fill="none" viewBox="0 0 24" stroke="currentColor" stroke-width="2">
+                             <path stroke-linecap="round" stroke-linejoin="round" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                         </svg>
+                         <span>Download Story as PDF</span>
+                    </button>
+                </div>
+            </div>
+        </main>
+        <footer class="text-center py-6">
+<footer>
+   <div class="footer-panel">
+     <div class="foot">
+        <p>Back To Top</p>
+     </div>
+     </div>
+        <div class="owner">
+           Design By <i class="fa-regular fa-heart"></i>Team Error.
+         </div>
+     </div>
+</footer>
+        </footer>
+    </div>
+
+    <!-- Image Modal -->
+    <div id="image-modal" class="hidden fixed inset-0 bg-black bg-opacity-75 z-50 flex items-center justify-center p-4 transition-opacity duration-300">
+        <div class="relative bg-white p-2 rounded-lg shadow-xl max-w-4xl max-h-[90vh] transform transition-all duration-300 scale-95 opacity-0" id="modal-container">
+            <img id="modal-img" src="" alt="Full-size story illustration" class="max-w-full max-h-[85vh] object-contain rounded">
+            <button id="modal-close-btn" class="absolute -top-3 -right-3 h-9 w-9 bg-white rounded-full text-gray-700 hover:text-black flex items-center justify-center text-2xl font-bold shadow-lg transition-transform hover:scale-110">&times;</button>
+        </div>
+    </div>
+
+
+ <script src="script.js"> </script>
+</body>
+</html>
+
